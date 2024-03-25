@@ -9,5 +9,5 @@ public class RocketMovement : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector2.up * Time.deltaTime * _speed);
-    }
+    }   
 }
