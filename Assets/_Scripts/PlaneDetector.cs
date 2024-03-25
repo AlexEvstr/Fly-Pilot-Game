@@ -51,6 +51,7 @@ public class PlaneDetector : MonoBehaviour
     {
         yield return new WaitForSeconds(1.15f);
         _gameOver.SetActive(true);
+        Time.timeScale = 0;
     }
 
     private IEnumerator ComboTimer()
