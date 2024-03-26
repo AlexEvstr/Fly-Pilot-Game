@@ -8,9 +8,14 @@ public class EnterGame : MonoBehaviour
     [SerializeField] private GameObject _tutorial;
     [SerializeField] private GameObject _pause;
 
+    [SerializeField] private SpriteRenderer _propeller;
+    [SerializeField] private Sprite[] _propellers;
+
     private void Start()
     {
         Time.timeScale = 1;
+        int index = PlayerPrefs.GetInt("index", 0);
+        _propeller.sprite = _propellers[index];
     }
 
     public void GoBtn()
