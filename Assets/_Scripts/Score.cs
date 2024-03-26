@@ -52,7 +52,7 @@ public class Score : MonoBehaviour
 
     private void Update()
     {
-        _bestScorePause.text = $"Best score: {(int)_bestScore}";
-        _bestScoreGameover.text = $"Best score: {(int)_bestScore}";
+        _bestScorePause.text = $"Best: {(int)_bestScore}";
+        _bestScoreGameover.text = $"Best: {(int)_bestScore}";
     }
 }
