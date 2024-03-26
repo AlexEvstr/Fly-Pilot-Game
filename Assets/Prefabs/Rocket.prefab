@@ -258,6 +258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySplash: {fileID: 406287323631095279, guid: dca120d82aadf46feba4e0219b5704a4, type: 3}
+  _audioSource: {fileID: 0}
+  _enemyDestroy: {fileID: 8300000, guid: 4d511deab715d437db835f3f1b5dec18, type: 3}
 --- !u!50 &7707810406450058608
 Rigidbody2D:
   serializedVersion: 4

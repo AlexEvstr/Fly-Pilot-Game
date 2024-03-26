@@ -13,6 +13,10 @@ public class PlaneDetector : MonoBehaviour
 
     [SerializeField] private GameObject _gameOver;
 
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _coinCollect;
+    [SerializeField] private AudioClip _gameOverSound;
+
     private float _factorCoefficient = 0.1f;
     private int _timer;
     private bool flag = false;
@@ -21,6 +25,8 @@ public class PlaneDetector : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Coin"))
         {
+            _audioSource.PlayOneShot(_coinCollect);
+
             Score.Factor += _factorCoefficient;
             _factorCoefficient *= 2;
             GameObject coinSplash = Instantiate(_coinSplash);
@@ -37,6 +43,7 @@ public class PlaneDetector : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
+            _audioSource.PlayOneShot(_gameOverSound);
             GameObject enemySplash = Instantiate(_gameoverSplash);
             enemySplash.transform.position = collision.gameObject.transform.position;
             Destroy(collision.gameObject);

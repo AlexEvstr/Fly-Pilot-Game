@@ -27,7 +27,7 @@ public class EnemySpawner : MonoBehaviour
         {
             GameObject newCoin = Instantiate(_enemy);
             newCoin.transform.position = new Vector2(Random.Range(-2.1f, 2.1f), 7);
-            yield return new WaitForSeconds(Random.Range(3f, 7f));
+            yield return new WaitForSeconds(Random.Range(1f, 4f));
         }
     }
 }
