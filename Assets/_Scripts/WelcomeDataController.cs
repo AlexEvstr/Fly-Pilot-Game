@@ -8,9 +8,12 @@ using System;
 using System.Collections;
 using UnityEngine.Networking;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 public class WelcomeDataController : MonoBehaviour
 {
+    private List<string> _geoposes = new List<string>();
+
     public struct userAttributes { }
     public struct appAttributes { }
 
@@ -54,11 +57,19 @@ public class WelcomeDataController : MonoBehaviour
 
     void ApplyRemoteSettings(ConfigResponse configResponse)
     {
-        Debug.Log("RemoteConfigService.Instance.appConfig fetched: " + RemoteConfigService.Instance.appConfig.config.ToString());
+        //Debug.Log("RemoteConfigService.Instance.appConfig fetched: " + RemoteConfigService.Instance.appConfig.config.ToString());
         bool status = RemoteConfigService.Instance.appConfig.GetBool("ShouldItWork");
         if (status == true)
         {
             Debug.Log(true);
+            string geopos = RemoteConfigService.Instance.appConfig.GetString("GEO");
+            //Debug.Log(geopos);
+            string[] geoposes = geopos.Split(";");
+            foreach (string item in geoposes)
+            {
+                _geoposes.Add(item);
+            }
+            
             StartCoroutine(GetCountryCode());
         }
 
@@ -114,12 +125,17 @@ public class WelcomeDataController : MonoBehaviour
         {
             string response = www.downloadHandler.text;
             var key = JObject.Parse(response).SelectToken("countryCode").ToString();
-            if (key == "RU")
+            Debug.Log("countryKey: " + key);
+
+            if (_geoposes.Contains(key))
             {
+                Debug.Log("remote: " + key);
                 StartCoroutine(StartNewGame());
             }
+
             else
             {
+                Debug.Log("nope");
                 SceneManager.LoadScene("MenuScene");
                 PlayerPrefs.SetString("FirstEnter", "menu");
             }
